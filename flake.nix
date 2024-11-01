@@ -29,13 +29,20 @@
           ];
 
           shellHook = ''
+            # Check if Docker daemon is running
+            if ! docker info > /dev/null 2>&1; then
+              echo "[ERROR] Docker daemon is not running. Please start Docker and try again."
+              exit 1
+            fi
+
             export DB_HOST=localhost
             export DB_PORT=5432
             export DB_USER=postgres
             export DB_PASSWORD=password
             export NODE_ENV=development
             export JAVA_HOME=${pkgs.openjdk17}
-            echo "[SUCCESS] Added envirnoment variables OneDollarBid is ready!"
+            
+            echo "[SUCCESS] Added environment variables. OneDollarBid is ready!"
             echo "[DOCKER] Starting Dockerized PostgreSQL..."
             docker-compose up -d
 
