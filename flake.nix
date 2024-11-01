@@ -31,7 +31,7 @@
           shellHook = ''
             # Check if Docker daemon is running
             if ! docker info > /dev/null 2>&1; then
-              echo "[ERROR] Docker daemon is not running. Please start Docker and try again."
+              echo -e "\e[31m[ERROR]\e[0m Docker daemon is not running. Please start Docker and try again."
               exit 1
             fi
 
@@ -41,12 +41,13 @@
             export DB_PASSWORD=password
             export NODE_ENV=development
             export JAVA_HOME=${pkgs.openjdk17}
+            export SPRING_PORT=8080
             
-            echo "[SUCCESS] Added environment variables. OneDollarBid is ready!"
-            echo "[DOCKER] Starting Dockerized PostgreSQL..."
+            echo -e "\e[32m[SUCCESS]\e[0m Added environment variables. OneDollarBid is ready!"
+            echo -e "\e[32m[DOCKER]\e[0m Starting Dockerized PostgreSQL..."
             docker-compose up -d
 
-            echo "Development environment for OneDollarBid is ready!"
+            echo -e "\e[32mDevelopment environment for OneDollarBid is ready!\e[0m"
             echo "Environment variables:"
             echo "  DB_HOST: $DB_HOST"
             echo "  DB_PORT: $DB_PORT"
@@ -54,10 +55,11 @@
             echo "  DB_PASSWORD: $DB_PASSWORD"
             echo "  NODE_ENV: $NODE_ENV"
             echo "  JAVA_HOME: $JAVA_HOME"
+            echo "  SPRING_PORT: $SPRING_PORT"
           '';
 
           shellExitHook = ''
-            echo "Stopping Dockerized PostgreSQL..."
+            echo -e "\e[31mStopping Dockerized PostgreSQL...\e[0m"
             docker-compose down
           '';
         };
