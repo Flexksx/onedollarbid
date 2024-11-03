@@ -1,1 +1,5 @@
+models/items/AuctionItem.class
+models/bids/Bid.class
 onedollarbid/Main.class
+models/rooms/AuctionRoom.class
+models/users/User.class

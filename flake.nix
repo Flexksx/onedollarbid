@@ -42,7 +42,7 @@
             export NODE_ENV=development
             export JAVA_HOME=${pkgs.openjdk17}
             export SPRING_PORT=8080
-            
+
             echo -e "\e[32m[SUCCESS]\e[0m Added environment variables. OneDollarBid is ready!"
             echo -e "\e[32m[DOCKER]\e[0m Starting Dockerized PostgreSQL..."
             docker-compose up -d
@@ -56,11 +56,16 @@
             echo "  NODE_ENV: $NODE_ENV"
             echo "  JAVA_HOME: $JAVA_HOME"
             echo "  SPRING_PORT: $SPRING_PORT"
+            echo "Cleaning maven cache..."
+            cd onedollarbid
+            mvn clean install
+            cd ..
+            echo -e "\e[32m[SUCCESS]\e[0m Maven cache cleaned!"
           '';
 
           shellExitHook = ''
-            echo -e "\e[31mStopping Dockerized PostgreSQL...\e[0m"
             docker-compose down
+            echo -e "\e[31mStopping Dockerized PostgreSQL...\e[0m"
           '';
         };
       }
