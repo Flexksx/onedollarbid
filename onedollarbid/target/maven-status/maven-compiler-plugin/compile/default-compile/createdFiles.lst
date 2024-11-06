@@ -1,5 +1,13 @@
-models/items/AuctionItem.class
-models/bids/Bid.class
+onedollarbid/model/AuctionRoom.class
+onedollarbid/service/BidService.class
+onedollarbid/model/User.class
+onedollarbid/model/AuctionItem.class
 onedollarbid/Main.class
-models/rooms/AuctionRoom.class
-models/users/User.class
+onedollarbid/repository/BidRepository.class
+onedollarbid/service/UserService.class
+onedollarbid/repository/UserRepository.class
+onedollarbid/service/AuctionItemService.class
+onedollarbid/repository/AuctionRoomRepository.class
+onedollarbid/service/AuctionRoomService.class
+onedollarbid/repository/AuctionItemRepository.class
+onedollarbid/model/Bid.class

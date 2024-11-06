@@ -25,12 +25,16 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User updateUser(int id, User updatedUser) {
+    public User updateUser(long id, User updatedUser) {
         updatedUser.setId(id);
         return userRepository.save(updatedUser);
     }
 
     public void deleteById(long id) {
         userRepository.deleteById(id);
+    }
+
+    public Optional<User> findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 }

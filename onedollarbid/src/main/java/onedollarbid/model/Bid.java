@@ -8,7 +8,7 @@ public class Bid {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @Column(nullable = false)
     private Double amount;
@@ -35,7 +35,7 @@ public class Bid {
         this.room = room;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -55,7 +55,7 @@ public class Bid {
         return room;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
