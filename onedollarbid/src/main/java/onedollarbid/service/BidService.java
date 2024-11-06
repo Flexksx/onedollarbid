@@ -18,7 +18,7 @@ public class BidService {
         return bidRepository.findAll();
     }
 
-    public Optional<Bid> findById(long id) {
+    public Optional<Bid> findById(Long id) {
         return bidRepository.findById(id);
     }
 
@@ -26,7 +26,7 @@ public class BidService {
         return bidRepository.save(bid);
     }
 
-    public void deleteById(long id) {
+    public void deleteById(Long id) {
         bidRepository.deleteById(id);
     }
 

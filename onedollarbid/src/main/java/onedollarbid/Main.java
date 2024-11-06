@@ -3,6 +3,7 @@ package onedollarbid;
 import onedollarbid.model.User;
 import onedollarbid.model.AuctionItem;
 import onedollarbid.service.AuctionItemService;
+import onedollarbid.service.BidService;
 import onedollarbid.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -16,6 +17,8 @@ public class Main implements CommandLineRunner {
     private UserService userService;
     @Autowired
     private AuctionItemService auctionItemService;
+    @Autowired
+    private BidService bidService;
 
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);

@@ -1,5 +1,8 @@
 package onedollarbid.controller;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,13 +16,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.opencsv.CSVReader;
 
 import onedollarbid.model.AuctionItem;
 import onedollarbid.service.AuctionItemService;
 
 @RestController
-@RequestMapping("/api/auction-items")
+@RequestMapping("/api/items")
 public class AuctionItemController {
     @Autowired
     private AuctionItemService auctionItemService;
@@ -48,16 +56,69 @@ public class AuctionItemController {
         return new ResponseEntity<>(createdAuctionItem, HttpStatus.CREATED);
     }
 
+    @PostMapping("/json")
+    public ResponseEntity<List<AuctionItem>> createAuctionItemsFromJson(@RequestParam("file") MultipartFile file) {
+        if (file.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        try {
+            List<AuctionItem> auctionItems = parseJsonFile(file);
+            List<AuctionItem> createdAuctionItems = auctionItemService.saveAll(auctionItems);
+            return new ResponseEntity<>(createdAuctionItems, HttpStatus.CREATED);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    private List<AuctionItem> parseJsonFile(MultipartFile file) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.readValue(file.getInputStream(),
+                objectMapper.getTypeFactory().constructCollectionType(List.class, AuctionItem.class));
+    }
+
+    @PostMapping("/csv")
+    public ResponseEntity<List<AuctionItem>> createAuctionItems(@RequestParam("file") MultipartFile file) {
+        if (file.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        try {
+            List<AuctionItem> auctionItems = parseCsvFile(file);
+            List<AuctionItem> createdAuctionItems = auctionItemService.saveAll(auctionItems);
+            return new ResponseEntity<>(createdAuctionItems, HttpStatus.CREATED);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    private List<AuctionItem> parseCsvFile(MultipartFile file) throws Exception {
+        List<AuctionItem> auctionItems = new ArrayList<>();
+        try (CSVReader reader = new CSVReader(new InputStreamReader(file.getInputStream()))) {
+            String[] nextLine;
+            while ((nextLine = reader.readNext()) != null) {
+                AuctionItem item = new AuctionItem();
+                item.setName(nextLine[0]);
+                item.setStartingPrice(Double.parseDouble(nextLine[1]));
+                auctionItems.add(item);
+            }
+        } catch (Exception e) {
+            throw new Exception("Error parsing CSV file: " + e.getMessage());
+        }
+        return auctionItems;
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<AuctionItem> updateAuctionItem(@PathVariable Long id,
             @RequestBody AuctionItem updatedAuctionItem) {
         Optional<AuctionItem> existingAuctionItem = auctionItemService.findById(id);
-        if (existingAuctionItem.isPresent()) {
-            updatedAuctionItem.setId(id);
-            AuctionItem savedAuctionItem = auctionItemService.updateAuctionItem(id, updatedAuctionItem);
-            return new ResponseEntity<>(savedAuctionItem, HttpStatus.OK);
-        } else {
+        if (!existingAuctionItem.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            updatedAuctionItem.setId(id);
+            AuctionItem savedAuctionItem = auctionItemService.save(updatedAuctionItem);
+            return new ResponseEntity<>(savedAuctionItem, HttpStatus.OK);
         }
     }
 

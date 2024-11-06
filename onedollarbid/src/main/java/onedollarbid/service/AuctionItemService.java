@@ -34,4 +34,8 @@ public class AuctionItemService {
         return auctionItemRepository.save(updatedAuctionItem);
     }
 
+    public List<AuctionItem> saveAll(List<AuctionItem> auctionItems) {
+        return auctionItemRepository.saveAll(auctionItems);
+    }
+
 }

@@ -1,5 +1,5 @@
-onedollarbid/controller/UserController.class
 onedollarbid/model/AuctionRoom.class
+onedollarbid/controller/UserController.class
 onedollarbid/service/BidService.class
 onedollarbid/model/User.class
 onedollarbid/model/AuctionItem.class
@@ -9,7 +9,9 @@ onedollarbid/service/UserService.class
 onedollarbid/repository/UserRepository.class
 onedollarbid/service/AuctionItemService.class
 onedollarbid/repository/AuctionRoomRepository.class
+onedollarbid/controller/AuctionRoomController.class
 onedollarbid/service/AuctionRoomService.class
-onedollarbid/repository/AuctionItemRepository.class
 onedollarbid/controller/AuctionItemController.class
+onedollarbid/repository/AuctionItemRepository.class
 onedollarbid/model/Bid.class
+onedollarbid/controller/BidController.class

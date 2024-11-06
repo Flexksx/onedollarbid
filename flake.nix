@@ -24,12 +24,12 @@
             pkgs.openjdk17
             pkgs.maven
             pkgs.nodejs
+            pkgs.yarn
             pkgs.docker
             pkgs.docker-compose
           ];
 
           shellHook = ''
-            # Check if Docker daemon is running
             if ! docker info > /dev/null 2>&1; then
               echo -e "\e[31m[ERROR]\e[0m Docker daemon is not running. Please start Docker and try again."
               exit 1
