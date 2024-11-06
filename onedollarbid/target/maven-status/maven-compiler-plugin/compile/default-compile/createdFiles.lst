@@ -9,6 +9,7 @@ onedollarbid/service/UserService.class
 onedollarbid/repository/UserRepository.class
 onedollarbid/service/AuctionItemService.class
 onedollarbid/repository/AuctionRoomRepository.class
+onedollarbid/cors/CorsConfig.class
 onedollarbid/controller/AuctionRoomController.class
 onedollarbid/service/AuctionRoomService.class
 onedollarbid/controller/AuctionItemController.class
