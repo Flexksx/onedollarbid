@@ -1,3 +1,4 @@
+onedollarbid/controller/UserController.class
 onedollarbid/model/AuctionRoom.class
 onedollarbid/service/BidService.class
 onedollarbid/model/User.class
@@ -10,4 +11,5 @@ onedollarbid/service/AuctionItemService.class
 onedollarbid/repository/AuctionRoomRepository.class
 onedollarbid/service/AuctionRoomService.class
 onedollarbid/repository/AuctionItemRepository.class
+onedollarbid/controller/AuctionItemController.class
 onedollarbid/model/Bid.class

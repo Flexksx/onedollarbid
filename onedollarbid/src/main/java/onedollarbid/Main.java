@@ -1,6 +1,8 @@
 package onedollarbid;
 
 import onedollarbid.model.User;
+import onedollarbid.model.AuctionItem;
+import onedollarbid.service.AuctionItemService;
 import onedollarbid.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -12,6 +14,8 @@ public class Main implements CommandLineRunner {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private AuctionItemService auctionItemService;
 
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);
@@ -19,18 +23,26 @@ public class Main implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        User newUser = new User();
-        newUser.setUsername("john_doe");
-        newUser.setBalance(100.0);
 
-        User createdUser = userService.save(newUser);
-        System.out.println("Created User: " + createdUser);
+        String[] testUserNames = { "john_doe", "jill_doe", "jack_doe", "jane_doe", "joe_doe", "jim_doe" };
+        for (String username : testUserNames) {
+            User user = new User();
+            user.setUsername(username);
+            user.setBalance(100.0);
+            User createdUser = userService.save(user);
+            System.out.println("Created User: " + createdUser.getUsername());
+        }
 
-        User updatedUser = new User();
-        updatedUser.setUsername("john_doe");
-        updatedUser.setBalance(150.0);
-        User savedUser = userService.updateUser(createdUser.getId(), updatedUser);
-        System.out.println("Updated User Balance: " + savedUser.getBalance());
+        String[] auctionItemsNames = { "BMW X4", "Pot plant", "Gibson Limited Edition", "AirPods Max", "Asus Vivobook",
+                "Pencil 3000" };
+        Double[] auctionItemsPrices = { 10000.0, 10.0, 2000.0, 500.0, 800.0, 5.0 };
+        for (int i = 0; i < auctionItemsNames.length; i++) {
+            AuctionItem auctionItem = new AuctionItem();
+            auctionItem.setName(auctionItemsNames[i]);
+            auctionItem.setStartingPrice(auctionItemsPrices[i]);
+            AuctionItem createdAuctionItem = auctionItemService.save(auctionItem);
+            System.out.println("Created Auction Item: " + createdAuctionItem.getName());
+        }
 
         System.out.println("User deleted successfully");
     }

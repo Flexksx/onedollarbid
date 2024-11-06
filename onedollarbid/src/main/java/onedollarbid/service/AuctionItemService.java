@@ -18,7 +18,7 @@ public class AuctionItemService {
         return auctionItemRepository.findAll();
     }
 
-    public Optional<AuctionItem> findById(long id) {
+    public Optional<AuctionItem> findById(Long id) {
         return auctionItemRepository.findById(id);
     }
 
@@ -26,8 +26,12 @@ public class AuctionItemService {
         return auctionItemRepository.save(auctionItem);
     }
 
-    public void deleteById(long id) {
+    public void deleteById(Long id) {
         auctionItemRepository.deleteById(id);
+    }
+
+    public AuctionItem updateAuctionItem(Long id, AuctionItem updatedAuctionItem) {
+        return auctionItemRepository.save(updatedAuctionItem);
     }
 
 }
