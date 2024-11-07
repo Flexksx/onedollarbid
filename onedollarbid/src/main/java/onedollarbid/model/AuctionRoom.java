@@ -3,12 +3,16 @@ package onedollarbid.model;
 import java.sql.Timestamp;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import jakarta.persistence.*;
+import onedollarbid.service.AuctionItemService;
 
 @Entity
 @Table(name = "rooms")
 public class AuctionRoom {
-
+    @Autowired
+    private static AuctionItemService auctionItemService;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -30,8 +34,8 @@ public class AuctionRoom {
     public AuctionRoom() {
     }
 
-    public AuctionRoom(AuctionItem item, Timestamp startTime, Timestamp endTime) {
-        this.item = item;
+    public AuctionRoom(Long itemId, Timestamp startTime, Timestamp endTime) {
+        this.item = auctionItemService.findById(itemId).get();
         this.startTime = startTime;
         this.endTime = endTime;
     }

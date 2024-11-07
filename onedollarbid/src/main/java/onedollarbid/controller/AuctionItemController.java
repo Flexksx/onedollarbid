@@ -32,11 +32,6 @@ public class AuctionItemController {
     @Autowired
     private AuctionItemService auctionItemService;
 
-    @GetMapping
-    public List<AuctionItem> getAllAuctionItems() {
-        return auctionItemService.findAll();
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<AuctionItem> getAuctionItemById(@PathVariable Long id) {
         Optional<AuctionItem> auctionItem = auctionItemService.findById(id);
@@ -45,6 +40,18 @@ public class AuctionItemController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @GetMapping
+    public ResponseEntity<List<AuctionItem>> getAllAuctionItems(
+            @RequestParam(defaultValue = "0") int offset,
+            @RequestParam(defaultValue = "8") int limit) {
+        if (offset < 0 || limit < 0) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        List<AuctionItem> auctionItems = auctionItemService.findAllWithPagination(offset, limit);
+        return new ResponseEntity<>(auctionItems, HttpStatus.OK);
     }
 
     @PostMapping

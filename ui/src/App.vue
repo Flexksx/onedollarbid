@@ -1,26 +1,19 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import axios from './axios/axios'
-
-const items = ref([])
-
-const fetchItems = async () => {
-  try {
-    const response = await axios.get('items') // This will use the base URL + '/items'
-    items.value = response.data
-  } catch (error) {
-    console.error('Error fetching items:', error)
-  }
-}
-
-onMounted(fetchItems)
+import router from './router/index';  // Import router instance
 </script>
 
 <template>
   <div>
-    <h1>Items</h1>
-    <ul>
-      <li v-for="item in items" :key="item.id">{{ item.name }}</li>
-    </ul>
+    <router-view />
   </div>
 </template>
+<style>
+body {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+  margin: 0;
+  padding: 0;
+}
+</style>
