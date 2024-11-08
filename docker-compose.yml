@@ -9,7 +9,30 @@ services:
       - "5432:5432"
     volumes:
       - ./database/postgres_data:/var/lib/postgresql/data
+  spring-app:
+    build:
+      context: ./onedollarbid
+      dockerfile: Dockerfile
+    container_name: onedollarbid-spring
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=password
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
 
+  vue-app:
+    build:
+      context: ./ui
+      dockerfile: Dockerfile
+    container_name: onedollarbid-vue
+    ports:
+      - "4137:80"
+    depends_on:
+      - spring-app
 volumes:
   postgres_data:
     driver: local

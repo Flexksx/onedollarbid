@@ -6,6 +6,7 @@
     <groupId>onedollarbid</groupId>
     <artifactId>onedollarbid</artifactId>
     <version>1.0-SNAPSHOT</version>
+
     <build>
         <plugins>
             <plugin>
@@ -15,19 +16,30 @@
                 <configuration>
                     <mainClass>onedollarbid.Main</mainClass>
                 </configuration>
-            </plugin>  <!--
-            Add the maven-compiler-plugin here to enable -parameters flag -->
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version> <!-- or another suitable version -->
+                <version>3.8.1</version>
                 <configuration>
                     <source>17</source>
                     <target>17</target>
                     <compilerArgs>
-                        <arg>-parameters</arg> <!-- Enable parameter names reflection -->
+                        <arg>-parameters</arg>
                     </compilerArgs>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>3.3.5</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
@@ -41,7 +53,6 @@
             <artifactId>spring-boot-starter-web</artifactId>
             <version>3.3.5</version>
         </dependency>
-
         <!--
         https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-websocket -->
         <dependency>
@@ -78,12 +89,6 @@
             <version>3.3.0</version>
         </dependency>
 
-        <!-- Spring Boot Starter Web -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <version>3.3.0</version>
-        </dependency>
 
         <!-- PostgreSQL Driver -->
         <dependency>

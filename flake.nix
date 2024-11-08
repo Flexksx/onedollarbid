@@ -23,7 +23,7 @@
           buildInputs = [
             pkgs.openjdk17
             pkgs.maven
-            pkgs.nodejs
+            pkgs.nodejs-18_x
             pkgs.yarn
             pkgs.docker
             pkgs.docker-compose
