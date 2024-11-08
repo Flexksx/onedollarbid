@@ -41,7 +41,6 @@
             export DB_PASSWORD=password
             export NODE_ENV=development
             export JAVA_HOME=${pkgs.openjdk17}
-            export SPRING_PORT=8080
 
             echo -e "\e[32m[SUCCESS]\e[0m Added environment variables. OneDollarBid is ready!"
             echo -e "\e[32m[DOCKER]\e[0m Starting Dockerized PostgreSQL..."

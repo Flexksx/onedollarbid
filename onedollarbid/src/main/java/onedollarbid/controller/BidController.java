@@ -8,14 +8,22 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import onedollarbid.model.AuctionRoom;
 import onedollarbid.model.Bid;
+import onedollarbid.model.User;
+import onedollarbid.service.AuctionRoomService;
 import onedollarbid.service.BidService;
+import onedollarbid.service.UserService;
 
 @RestController
 @RequestMapping("/api/bids")
 public class BidController {
     @Autowired
     private BidService bidService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private AuctionRoomService auctionRoomService;
 
     @GetMapping
     public List<Bid> getAllBids() {

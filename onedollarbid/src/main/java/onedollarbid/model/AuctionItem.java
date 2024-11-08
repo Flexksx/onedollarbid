@@ -24,13 +24,6 @@ public class AuctionItem {
     @Column(nullable = true)
     private Boolean sold = false;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "winner_id")
-    private User winner;
-
-    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Bid> bids;
-
     public AuctionItem() {
     }
 
@@ -78,14 +71,6 @@ public class AuctionItem {
 
     public void setSold(Boolean sold) {
         this.sold = sold;
-    }
-
-    public User getWinner() {
-        return winner;
-    }
-
-    public void setWinner(User winner) {
-        this.winner = winner;
     }
 
 }

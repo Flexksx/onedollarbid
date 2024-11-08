@@ -13,66 +13,47 @@ public class Bid {
     @Column(nullable = false)
     private Double amount;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
-    @ManyToOne
-    @JoinColumn(name = "item_id", nullable = false)
-    private AuctionItem item;
-
-    @ManyToOne
-    @JoinColumn(name = "room_id")
-    private AuctionRoom room;
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
 
     public Bid() {
     }
 
-    public Bid(Double amount, User user, AuctionItem item, AuctionRoom room) {
+    public Bid(Double amount, Long userId) {
         this.amount = amount;
-        this.user = user;
-        this.item = item;
-        this.room = room;
+        this.userId = userId;
     }
 
     public Long getId() {
         return id;
     }
 
-    public Double getAmount() {
-        return amount;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public AuctionItem getItem() {
-        return item;
-    }
-
-    public AuctionRoom getRoom() {
-        return room;
-    }
-
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Double getAmount() {
+        return amount;
     }
 
     public void setAmount(Double amount) {
         this.amount = amount;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setItem(AuctionItem item) {
-        this.item = item;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public void setRoom(AuctionRoom room) {
-        this.room = room;
+    @Override
+    public String toString() {
+        return "Bid{" +
+                "id=" + id +
+                ", amount=" + amount +
+                ", userId=" + userId +
+                '}';
     }
-
 }

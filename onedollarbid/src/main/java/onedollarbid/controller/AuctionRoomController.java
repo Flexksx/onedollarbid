@@ -8,7 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import onedollarbid.model.AuctionItem;
 import onedollarbid.model.AuctionRoom;
+import onedollarbid.service.AuctionItemService;
 import onedollarbid.service.AuctionRoomService;
 
 @RestController
@@ -17,6 +19,8 @@ public class AuctionRoomController {
 
     @Autowired
     private AuctionRoomService auctionRoomService;
+    @Autowired
+    private AuctionItemService auctionItemService;
 
     @GetMapping
     public List<AuctionRoom> getAllAuctionRooms() {
@@ -50,6 +54,23 @@ public class AuctionRoomController {
             updatedAuctionRoom.setId(id);
             AuctionRoom savedAuctionRoom = auctionRoomService.save(updatedAuctionRoom);
             return new ResponseEntity<>(savedAuctionRoom, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PutMapping("/{roomId}/addUser/{userId}")
+    public ResponseEntity<AuctionRoom> addUserToAuctionRoom(@PathVariable Long roomId, @PathVariable Long userId) {
+        Optional<AuctionRoom> auctionRoom = auctionRoomService.findById(roomId);
+        if (auctionRoom.isPresent()) {
+            Optional<AuctionItem> auctionItem = auctionItemService.findById(auctionRoom.get().getItemId());
+            if (auctionItem.isPresent() && !auctionItem.get().getSold()) {
+                auctionRoom.get().addUserId(userId);
+                AuctionRoom savedAuctionRoom = auctionRoomService.save(auctionRoom.get());
+                return new ResponseEntity<>(savedAuctionRoom, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

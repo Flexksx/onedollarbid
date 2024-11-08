@@ -1,83 +1,62 @@
 package onedollarbid.model;
 
-import java.sql.Timestamp;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Set;
 
 import jakarta.persistence.*;
-import onedollarbid.service.AuctionItemService;
 
 @Entity
 @Table(name = "rooms")
 public class AuctionRoom {
-    @Autowired
-    private static AuctionItemService auctionItemService;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "item_id", nullable = false)
-    private AuctionItem item;
+    @Column(name = "item_id", nullable = false)
+    private Long itemId;
 
-    @Column(nullable = false)
-    private Timestamp startTime;
-
-    @Column(nullable = false)
-    private Timestamp endTime;
-
-    @ManyToMany
-    @JoinTable(name = "room_users", joinColumns = @JoinColumn(name = "room_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private List<User> users;
+    @ElementCollection
+    @CollectionTable(name = "room_users", joinColumns = @JoinColumn(name = "room_id"))
+    @Column(name = "user_id")
+    private Set<Long> userIds;
 
     public AuctionRoom() {
     }
 
-    public AuctionRoom(Long itemId, Timestamp startTime, Timestamp endTime) {
-        this.item = auctionItemService.findById(itemId).get();
-        this.startTime = startTime;
-        this.endTime = endTime;
+    public AuctionRoom(Long itemId) {
+        this.itemId = itemId;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public AuctionItem getItem() {
-        return item;
+    public Long getItemId() {
+        return itemId;
     }
 
-    public void setItem(AuctionItem item) {
-        this.item = item;
+    public void setItemId(Long itemId) {
+        this.itemId = itemId;
     }
 
-    public Timestamp getStartTime() {
-        return startTime;
+    public Set<Long> getUserIds() {
+        return userIds;
     }
 
-    public void setStartTime(Timestamp startTime) {
-        this.startTime = startTime;
+    public void setUserIds(Set<Long> userIds) {
+        this.userIds = userIds;
     }
 
-    public Timestamp getEndTime() {
-        return endTime;
+    public void addUserId(Long userId) {
+        this.userIds.add(userId);
     }
 
-    public void setEndTime(Timestamp endTime) {
-        this.endTime = endTime;
+    public void removeUserId(Long userId) {
+        this.userIds.remove(userId);
     }
-
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
-
 }

@@ -1,6 +1,6 @@
 <script setup>
 import { defineProps } from 'vue'
-
+import RoomRedirectButton from './RoomRedirectButton.vue';
 const props = defineProps({
   product: {
     type: Object,
@@ -8,18 +8,13 @@ const props = defineProps({
   }
 })
 
-const redirectToAuction = () => {
-  window.location.href = `/rooms/${props.product.id}`;
-}
 </script>
 
 <template>
   <div class="product-box">
     <h3>{{ product.name }}</h3>
     <p>Price: ${{ product.startingPrice }}</p>
-
-    <!-- Auction Button (Fixed at the bottom of the box) -->
-    <button @click="redirectToAuction" class="auction-button">Auction</button>
+    <RoomRedirectButton :product="product" />
   </div>
 </template>
 

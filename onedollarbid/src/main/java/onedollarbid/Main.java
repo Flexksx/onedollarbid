@@ -31,14 +31,6 @@ public class Main implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        String[] testUserNames = { "john_doe", "jill_doe", "jack_doe", "jane_doe", "joe_doe", "jim_doe" };
-        for (String username : testUserNames) {
-            User user = new User();
-            user.setUsername(username);
-            user.setBalance(100.0);
-            User createdUser = userService.save(user);
-            System.out.println("Created User: " + createdUser.getUsername());
-        }
         Map<String, Double> testAuctionItems = new HashMap<>();
         testAuctionItems.put("BMW X4", 10000.0);
         testAuctionItems.put("Pot plant", 10.0);
