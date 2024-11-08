@@ -1,3 +1,4 @@
+/home/flexksx/Labs/onedollarbid/onedollarbid/src/main/java/onedollarbid/websocket/AuctionBidController.java
 /home/flexksx/Labs/onedollarbid/onedollarbid/src/main/java/onedollarbid/Main.java
 /home/flexksx/Labs/onedollarbid/onedollarbid/src/main/java/onedollarbid/service/AuctionRoomService.java
 /home/flexksx/Labs/onedollarbid/onedollarbid/src/main/java/onedollarbid/model/AuctionItem.java
@@ -9,6 +10,7 @@
 /home/flexksx/Labs/onedollarbid/onedollarbid/src/main/java/onedollarbid/repository/AuctionItemRepository.java
 /home/flexksx/Labs/onedollarbid/onedollarbid/src/main/java/onedollarbid/service/AuctionItemService.java
 /home/flexksx/Labs/onedollarbid/onedollarbid/src/main/java/onedollarbid/model/User.java
+/home/flexksx/Labs/onedollarbid/onedollarbid/src/main/java/onedollarbid/websocket/WebSocketConfig.java
 /home/flexksx/Labs/onedollarbid/onedollarbid/src/main/java/onedollarbid/controller/AuctionRoomController.java
 /home/flexksx/Labs/onedollarbid/onedollarbid/src/main/java/onedollarbid/service/BidService.java
 /home/flexksx/Labs/onedollarbid/onedollarbid/src/main/java/onedollarbid/model/AuctionRoom.java

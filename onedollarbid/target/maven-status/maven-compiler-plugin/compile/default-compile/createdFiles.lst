@@ -12,6 +12,7 @@ onedollarbid/repository/AuctionRoomRepository.class
 onedollarbid/cors/CorsConfig.class
 onedollarbid/controller/AuctionRoomController.class
 onedollarbid/service/AuctionRoomService.class
+onedollarbid/websocket/WebSocketConfig.class
 onedollarbid/controller/AuctionItemController.class
 onedollarbid/repository/AuctionItemRepository.class
 onedollarbid/model/Bid.class

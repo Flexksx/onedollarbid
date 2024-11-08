@@ -8,7 +8,7 @@ const route = useRoute();
 const roomId = route.params.id; // Access the roomId from the URL
 
 const username = ref('');
-
+const userId = ref('');
 // Fetch user data (you can adjust this based on your app’s logic)
 const getUserData = async (userId) => {
   try {
@@ -73,6 +73,9 @@ const addUserToRoom = async (userId) => {
 // Handle updated username from JoinButton
 const handleUsernameUpdated = (newUserId) => {
   console.log('Username updated:', newUserId);
+  userId.value = newUserId;
+  console.log('New user ID:', userId.value);
+  
   addUserToRoom(newUserId);
   const fetchedUserData = getUserData(newUserId);
   fetchedUserData.then((data) => {
@@ -94,7 +97,7 @@ onMounted(() => {
     <p v-else>Please enter your username to join the auction.</p>    
     <JoinButton @userJoin="handleUsernameUpdated" />
   </div>
-  <BidsBox />
+  <BidsBox :userId=userId />
 </template>
 
 <style scoped>
