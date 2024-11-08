@@ -1,55 +1,55 @@
-<script type="module">
-  import { Client } from '@stomp/stompjs';
-
-  const client = new Client({
-    brokerURL: 'ws://localhost:8080/ws',
-    onConnect: () => {
-      client.subscribe('/topic', message =>
-        console.log(`Received: ${message.body}`)
-      );
-      client.publish({ destination: '/topic', body: 'First Message' });
-    },
-  });
-
-  client.activate();
-</script>
 <script setup>
 
 import { ref, onMounted, onUnmounted } from 'vue'
 import { Client } from '@stomp/stompjs'
 const bids = ref([])
 const connectionStatus = ref('disconnected')
-const stompClient = ref(null)
-const connectWebSocket = () => {
-    stompClient.value = new Client({
-        brokerURL: 'ws://localhost:8080/ws',
-    })
 
-    stompClient.value.onConnect = () => {
-        connectionStatus.value = 'connected'
-        console.log('Connected to WebSocket')
-        stompClient.value.subscribe('/topic/bids', (message) => {
-            const bid = JSON.parse(message.body)
-            bids.value = [bid, ...bids.value]
-        })
-    }
+const stompClient = new Client({
+    brokerURL: 'ws://localhost:8080/ws'});
+
+    stompClient.onConnect = (frame) => {
+    connectionStatus.value = 'connected';
+    setConnected(true);
+    console.log('Connected: ' + frame);
+    stompClient.subscribe('/topic/greetings', (greeting) => {
+        showGreeting(JSON.parse(greeting.body).content);
+    });
+};
+
+stompClient.onWebSocketError = (error) => {
+    connectionStatus.value = 'error';
+    console.error('Error: ' + error + error.message);
+    
+};
+
+stompClient.onStompError = (frame) => {
+    console.error('Broker reported error: ' + frame.headers['message']);
+    console.error('Additional details: ' + frame.body);
+};
+
+const connect = () => {
+    stompClient.activate();
 }
 
-const disconnectWebSocket = () => {
-    if (stompClient.value) {
-        stompClient.value.disconnect(() => {
-            connectionStatus.value = 'disconnected'
-            console.log('Disconnected from WebSocket')
-        })
+const disconnect = () => {
+    stompClient.deactivate();
+    setConnected(false);
+    console.log("Disconnected");
+ }
+
+const setConnected = (connected) => {
+    if (connected) {
+        stompClient.subscribe('/topic/bids', (bid) => {
+            bids.value = JSON.parse(bid.body);
+        });
+    } else {
+        bids.value = [];
     }
 }
 
 onMounted(() => {
-    connectWebSocket()
-})
-
-onUnmounted(() => {
-    disconnectWebSocket()
+    connect();
 })
 
 const sendBid = (amount) => {
