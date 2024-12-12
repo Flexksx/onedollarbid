@@ -1,6 +1,5 @@
 package onedollarbid;
 
-import onedollarbid.model.User;
 import onedollarbid.model.AuctionItem;
 import onedollarbid.service.AuctionItemService;
 import onedollarbid.service.BidService;
@@ -56,5 +55,6 @@ public class Main implements CommandLineRunner {
             System.out.println("Created Auction Item: " + createdAuctionItem.getName());
         }
         System.out.println("User deleted successfully");
+        System.out.println("This is the version with RAFT");
     }
 }

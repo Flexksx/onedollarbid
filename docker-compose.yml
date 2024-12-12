@@ -9,6 +9,11 @@ services:
       - "5432:5432"
     volumes:
       - ./database/postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
   spring-app:
     build:
       context: ./onedollarbid
@@ -22,17 +27,18 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
 
-  vue-app:
-    build:
-      context: ./ui
-      dockerfile: Dockerfile
-    container_name: onedollarbid-vue
-    ports:
-      - "4137:80"
-    depends_on:
-      - spring-app
+  # vue-app:
+  #   build:
+  #     context: ./ui
+  #     dockerfile: Dockerfile
+  #   container_name: onedollarbid-vue
+  #   ports:
+  #     - "4137:80"
+  #   depends_on:
+  #     - spring-app
 volumes:
   postgres_data:
     driver: local
