@@ -13,7 +13,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import lombok.RequiredArgsConstructor;
+import onedollarbid.config.UdpConfig;
 
 @Service
 @RequiredArgsConstructor
@@ -238,6 +240,11 @@ public class RaftLeaderElectionService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @PreDestroy
+    public void shutdown() {
+        logger.info("Shutting down RaftLeaderElectionService for Node {}", udpConfig.getNodeId());
     }
 
     @PostConstruct

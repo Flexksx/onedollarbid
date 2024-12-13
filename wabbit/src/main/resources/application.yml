@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: wabbit
+  rabbitmq:
+    host: ${SPRING_RABBITMQ_HOST:localhost}
+    port: 15672
+    username: guest
+    password: guest
+
+rabbitmq:
+  queue:
+    name: auction_items_queue
+  exchange:
+    name: auction_items_exchange
+  routing:
+    key: auction_items
+
+server:
+  port: 9090
+
+onedollarbid:
+  host: ${ONEDOLLARBID_HOST:localhost}
+  port: 8080
+  protocol: http
+  node: 1
+
+ftp:
+  host: ${FTP_HOST:localhost}
+  port: 21
+  user: testuser
+  password: testpass

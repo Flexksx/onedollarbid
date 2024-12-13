@@ -13,6 +13,7 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import lombok.RequiredArgsConstructor;
+import onedollarbid.config.UdpConfig;
 
 @Service
 @RequiredArgsConstructor

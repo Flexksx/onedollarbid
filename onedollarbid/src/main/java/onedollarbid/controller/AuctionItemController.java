@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.opencsv.CSVReader;
 
 import onedollarbid.model.AuctionItem;
 import onedollarbid.service.AuctionItemService;
@@ -82,38 +81,6 @@ public class AuctionItemController {
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.readValue(file.getInputStream(),
                 objectMapper.getTypeFactory().constructCollectionType(List.class, AuctionItem.class));
-    }
-
-    @PostMapping("/csv")
-    public ResponseEntity<List<AuctionItem>> createAuctionItems(@RequestParam("file") MultipartFile file) {
-        if (file.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
-        try {
-            List<AuctionItem> auctionItems = parseCsvFile(file);
-            List<AuctionItem> createdAuctionItems = auctionItemService.saveAll(auctionItems);
-            return new ResponseEntity<>(createdAuctionItems, HttpStatus.CREATED);
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    private List<AuctionItem> parseCsvFile(MultipartFile file) throws Exception {
-        List<AuctionItem> auctionItems = new ArrayList<>();
-        try (CSVReader reader = new CSVReader(new InputStreamReader(file.getInputStream()))) {
-            String[] nextLine;
-            while ((nextLine = reader.readNext()) != null) {
-                AuctionItem item = new AuctionItem();
-                item.setName(nextLine[0]);
-                item.setStartingPrice(Double.parseDouble(nextLine[1]));
-                auctionItems.add(item);
-            }
-        } catch (Exception e) {
-            throw new Exception("Error parsing CSV file: " + e.getMessage());
-        }
-        return auctionItems;
     }
 
     @PutMapping("/{id}")

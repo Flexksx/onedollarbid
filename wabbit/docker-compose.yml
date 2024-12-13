@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  app:
+    container_name: manager
+    build: .
+    ports:
+      - "9090:9090"
+    environment:
+      - SPRING_MAIL_PORT=587
+      - SPRING_RABBITMQ_HOST=localhost
+      - FTP_HOST=host.docker.internal
+      - ONEDOLLARBID_HOST=localhost

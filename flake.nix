@@ -21,6 +21,7 @@
       {
         devShells.default = pkgs.mkShell {
           buildInputs = [
+            pkgs.python312
             pkgs.openjdk17
             pkgs.maven
             pkgs.nodejs-18_x

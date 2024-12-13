@@ -1,44 +1,100 @@
+version: "3.8"
+
 services:
+  # PostgreSQL database service
   postgres:
     image: postgres:latest
+    container_name: postgres_db
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=onedollarbid
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: onedollarbid
     ports:
       - "5432:5432"
     volumes:
       - ./database/postgres_data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-  spring-app:
+      interval: 2s
+      timeout: 2s
+      retries: 2
+
+  # Node 1
+  node1:
     build:
       context: ./onedollarbid
       dockerfile: Dockerfile
-    container_name: onedollarbid-spring
+    container_name: onedollarbid-node1
     environment:
-      - DB_HOST=postgres
-      - DB_PORT=5432
-      - DB_USER=postgres
-      - DB_PASSWORD=password
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/onedollarbid
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=password
+      - SERVER_HOST=host.docker.internal
+      - SERVER_PORT=8080
+      - NODE_ID=1
+      - UDP_MULTICAST_ADDRESS=230.0.0.0
+      - UDP_MULTICAST_PORT=5000
+      - MANAGER_SERVER_HOST=host.docker.internal
+      - MANAGER_SERVER_PORT=9090
     ports:
       - "8080:8080"
     depends_on:
       postgres:
         condition: service_healthy
 
-  # vue-app:
-  #   build:
-  #     context: ./ui
-  #     dockerfile: Dockerfile
-  #   container_name: onedollarbid-vue
-  #   ports:
-  #     - "4137:80"
-  #   depends_on:
-  #     - spring-app
+  # Node 2
+  node2:
+    build:
+      context: ./onedollarbid
+      dockerfile: Dockerfile
+    container_name: onedollarbid-node2
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/onedollarbid
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=password
+      - SERVER_HOST=host.docker.internal
+      - SERVER_PORT=8081
+      - NODE_ID=2
+      - UDP_MULTICAST_ADDRESS=230.0.0.0
+      - UDP_MULTICAST_PORT=5000
+      - MANAGER_SERVER_HOST=host.docker.internal
+      - MANAGER_SERVER_PORT=9090
+    ports:
+      - "8081:8081"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # Node 3
+  node3:
+    build:
+      context: ./onedollarbid
+      dockerfile: Dockerfile
+    container_name: onedollarbid-node3
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/onedollarbid
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=password
+      - SERVER_HOST=host.docker.internal
+      - SERVER_PORT=8082
+      - NODE_ID=3
+      - UDP_MULTICAST_ADDRESS=230.0.0.0
+      - UDP_MULTICAST_PORT=5000
+      - MANAGER_SERVER_HOST=host.docker.internal
+      - MANAGER_SERVER_PORT=9090
+    ports:
+      - "8082:8082"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
 volumes:
   postgres_data:
     driver: local

@@ -1,4 +1,3 @@
-# Stage 1: Build
 FROM maven:3.9.6-amazoncorretto-21 AS build
 WORKDIR /app
 
@@ -27,6 +26,8 @@ RUN echo "=== Built JAR Contents ===" && ls -l app.jar
 
 # Optional: Verify the JAR file
 RUN echo "=== Verifying JAR File ===" && java -jar app.jar --help || echo "JAR verification skipped."
+
+EXPOSE 9090
 
 # Entry point to run the application
 ENTRYPOINT ["java", "-jar", "app.jar"]
