@@ -52,7 +52,6 @@ const AuctionItemService = {
   saveAllAuctionItems: async (
     itemsData: AuctionItemCreationPayload[]
   ): Promise<AuctionItem[]> => {
-    // Assuming a batch create endpoint, e.g., /items/batch
     const response = await axiosInstance.post<AuctionItem[]>(
       "/items/batch",
       itemsData

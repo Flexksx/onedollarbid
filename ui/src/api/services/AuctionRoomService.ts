@@ -36,8 +36,6 @@ const AuctionRoomService = {
     );
     return response.data;
   },
-
-  
 };
 
 export default AuctionRoomService;
