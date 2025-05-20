@@ -24,7 +24,7 @@
             pkgs.python312
             pkgs.openjdk17
             pkgs.maven
-            pkgs.nodejs-18_x
+            pkgs.nodejs_24
             pkgs.yarn
             pkgs.docker
             pkgs.docker-compose
