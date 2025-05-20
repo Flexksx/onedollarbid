@@ -1,4 +1,4 @@
-package onedollarbid.controller;
+package onedollarbid.bid;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,12 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import onedollarbid.model.AuctionRoom;
-import onedollarbid.model.Bid;
-import onedollarbid.model.User;
-import onedollarbid.service.AuctionRoomService;
-import onedollarbid.service.BidService;
-import onedollarbid.service.UserService;
+import onedollarbid.auction_room.AuctionRoom;
+import onedollarbid.auction_room.AuctionRoomService;
+import onedollarbid.user.User;
+import onedollarbid.user.UserService;
 
 @RestController
 @RequestMapping("/api/bids")

@@ -1,13 +1,10 @@
-package onedollarbid.service;
+package onedollarbid.auction_room;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import onedollarbid.model.AuctionRoom;
-import onedollarbid.repository.AuctionRoomRepository;
 
 @Service
 public class AuctionRoomService {

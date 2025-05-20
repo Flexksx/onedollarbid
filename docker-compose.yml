@@ -95,6 +95,18 @@ services:
       - "5672:5672"
       - "15672:15672"
 
+  ui:
+    build:
+      context: ./ui
+      dockerfile: Dockerfile
+    container_name: onedollarbid-ui
+    ports:
+      - "80:80"
+    depends_on:
+      - node1
+      - node2
+      - node3
+
 volumes:
   postgres_data:
     driver: local

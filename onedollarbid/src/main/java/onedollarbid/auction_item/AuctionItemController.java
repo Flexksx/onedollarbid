@@ -1,4 +1,4 @@
-package onedollarbid.controller;
+package onedollarbid.auction_item;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -21,9 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import onedollarbid.model.AuctionItem;
-import onedollarbid.service.AuctionItemService;
 
 @RestController
 @RequestMapping("/api/items")

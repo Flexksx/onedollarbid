@@ -1,4 +1,4 @@
-package onedollarbid.service;
+package onedollarbid.auction_item;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,9 +7,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
-import onedollarbid.model.AuctionItem;
-import onedollarbid.repository.AuctionItemRepository;
 
 @Service
 public class AuctionItemService {

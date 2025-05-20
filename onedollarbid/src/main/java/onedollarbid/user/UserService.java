@@ -1,9 +1,8 @@
-package onedollarbid.service;
+package onedollarbid.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import onedollarbid.model.User;
-import onedollarbid.repository.UserRepository;
+
 import java.util.List;
 import java.util.Optional;
 

@@ -1,4 +1,4 @@
-package onedollarbid.controller;
+package onedollarbid.auction_room;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,10 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import onedollarbid.model.AuctionItem;
-import onedollarbid.model.AuctionRoom;
-import onedollarbid.service.AuctionItemService;
-import onedollarbid.service.AuctionRoomService;
+import onedollarbid.auction_item.AuctionItem;
+import onedollarbid.auction_item.AuctionItemService;
 
 @RestController
 @RequestMapping("/api/rooms")

@@ -1,9 +1,9 @@
 package onedollarbid;
 
-import onedollarbid.model.AuctionItem;
-import onedollarbid.service.AuctionItemService;
-import onedollarbid.service.BidService;
-import onedollarbid.service.UserService;
+import onedollarbid.auction_item.AuctionItem;
+import onedollarbid.auction_item.AuctionItemService;
+import onedollarbid.bid.BidService;
+import onedollarbid.user.UserService;
 
 import java.util.HashMap;
 import java.util.Map;
