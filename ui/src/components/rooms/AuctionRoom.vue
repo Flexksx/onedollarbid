@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
-import axios from '../../axios/axios';
+import axios from '../../api/axios/axios';
 import JoinButton from './JoinButton.vue';
 import BidsBox from './BidsBox.vue';
 const route = useRoute();

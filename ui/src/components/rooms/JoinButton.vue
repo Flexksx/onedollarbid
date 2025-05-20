@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
-import axiosInstance from '../../axios/axios';
+import axiosInstance from '../../api/axios/axios';
 import { defineEmits } from 'vue';
 
 const emit = defineEmits(['userJoin']);

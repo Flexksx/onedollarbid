@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue'
 import { Client } from '@stomp/stompjs'
-import axiosInstance from '../../axios/axios';
+import axiosInstance from '../../api/axios/axios';
 import { useRoute } from 'vue-router';
 const props = defineProps({
     userId: {
