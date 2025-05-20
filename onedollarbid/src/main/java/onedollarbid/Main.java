@@ -1,9 +1,9 @@
 package onedollarbid;
 
-import onedollarbid.model.AuctionItem;
-import onedollarbid.service.AuctionItemService;
-import onedollarbid.service.BidService;
-import onedollarbid.service.UserService;
+import onedollarbid.auction_item.AuctionItem;
+import onedollarbid.auction_item.AuctionItemService;
+import onedollarbid.bid.BidService;
+import onedollarbid.user.UserService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,32 +29,7 @@ public class Main implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
-        Map<String, Double> testAuctionItems = new HashMap<>();
-        testAuctionItems.put("BMW X4", 10000.0);
-        testAuctionItems.put("Pot plant", 10.0);
-        testAuctionItems.put("Gibson Limited Edition", 2000.0);
-        testAuctionItems.put("AirPods Max", 500.0);
-        testAuctionItems.put("Asus Vivobook", 800.0);
-        testAuctionItems.put("Pencil 3000", 5.0);
-        testAuctionItems.put("MacBook Pro", 2000.0);
-        testAuctionItems.put("Samsung Galaxy S21", 800.0);
-        testAuctionItems.put("Apple Watch Series 6", 500.0);
-        testAuctionItems.put("Sony WH-1000XM4", 500.0);
-        testAuctionItems.put("Nintendo Switch", 500.0);
-        testAuctionItems.put("PlayStation 5", 500.0);
-        testAuctionItems.put("Xbox Series X", 500.0);
-        testAuctionItems.put("Apple AirTag", 20.0);
-        testAuctionItems.put("Apple AirPods Pro", 200.0);
-        testAuctionItems.put("Apple AirPods", 150.0);
-        for (Map.Entry<String, Double> entry : testAuctionItems.entrySet()) {
-            AuctionItem auctionItem = new AuctionItem();
-            auctionItem.setName(entry.getKey());
-            auctionItem.setStartingPrice(entry.getValue());
-            AuctionItem createdAuctionItem = auctionItemService.save(auctionItem);
-            System.out.println("Created Auction Item: " + createdAuctionItem.getName());
-        }
-        System.out.println("User deleted successfully");
-        System.out.println("This is the version with RAFT");
+        System.out.println("Starting OneDollarBid application...");
     }
+
 }

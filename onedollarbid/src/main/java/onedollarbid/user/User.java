@@ -1,6 +1,7 @@
-package onedollarbid.model;
+package onedollarbid.user;
 
 import jakarta.persistence.*;
+import onedollarbid.bid.Bid;
 
 import java.util.List;
 

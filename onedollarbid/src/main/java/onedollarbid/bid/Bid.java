@@ -1,4 +1,4 @@
-package onedollarbid.model;
+package onedollarbid.bid;
 
 import jakarta.persistence.*;
 

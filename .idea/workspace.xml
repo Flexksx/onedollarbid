@@ -5,10 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1f95beec-d822-4fbc-8c9d-2d1c4068ee93" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/onedollarbid/src/main/java/onedollarbid/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/onedollarbid/src/main/java/onedollarbid/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/onedollarbid/src/main/java/onedollarbid/controller/AuctionItemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/onedollarbid/src/main/java/onedollarbid/controller/AuctionItemController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/onedollarbid/src/main/java/onedollarbid/controller/AuctionRoomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/onedollarbid/src/main/java/onedollarbid/controller/AuctionRoomController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/onedollarbid/src/main/java/onedollarbid/model/AuctionItem.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/onedollarbid/src/main/java/onedollarbid/repository/AuctionItemRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/onedollarbid/src/main/java/onedollarbid/repository/AuctionItemRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/onedollarbid/src/main/java/onedollarbid/service/AuctionItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/onedollarbid/src/main/java/onedollarbid/service/AuctionItemService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/onedollarbid/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/onedollarbid/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/onedollarbid/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/onedollarbid/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/onedollarbid/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/onedollarbid/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/onedollarbid/target/onedollarbid-1.0.0-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/onedollarbid/target/onedollarbid-1.0.0-SNAPSHOT.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/ui/Dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,31 +31,35 @@
   <component name="MacroExpansionManager">
     <option name="directoryName" value="u00s9evh" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 1
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2oQGCdQVu6za2Q13WZvazG4DN19" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "nodejs_package_manager_path": "npm",
-    "org.rust.cargo.project.model.impl.CargoExternalSystemProjectAware.subscribe.first.balloon": "",
-    "org.rust.first.attach.projects": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/ccretu/Projects/onedollarbid&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;org.rust.cargo.project.model.impl.CargoExternalSystemProjectAware.subscribe.first.balloon&quot;: &quot;&quot;,
+    &quot;org.rust.first.attach.projects&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.15989.150" />
-        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-IU-241.15989.150" />
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.25410.129" />
+        <option value="bundled-js-predefined-d6986cc7102b-6a121458b545-JavaScript-IU-251.25410.129" />
       </set>
     </attachedChunks>
   </component>
@@ -58,6 +72,8 @@
       <option name="presentableId" value="Default" />
       <updated>1730794261819</updated>
       <workItem from="1730794263719" duration="60000" />
+      <workItem from="1747757348319" duration="88000" />
+      <workItem from="1747757451723" duration="89000" />
     </task>
     <servers />
   </component>

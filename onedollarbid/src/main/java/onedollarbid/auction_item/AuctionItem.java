@@ -1,4 +1,4 @@
-package onedollarbid.model;
+package onedollarbid.auction_item;
 
 import java.util.List;
 
