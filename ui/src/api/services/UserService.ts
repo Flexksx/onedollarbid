@@ -31,8 +31,6 @@ const UserService = {
   },
 
   findByUsername: async (username: string): Promise<User | null> => {
-    // Assuming an endpoint like /users/username/{username} or /users/search/findByUsername?username=...
-    // For now, using a common pattern. Adjust if your backend endpoint is different.
     try {
       const response = await axiosInstance.get<User>(
         `/users/username/${username}`
@@ -40,9 +38,9 @@ const UserService = {
       return response.data;
     } catch (error: any) {
       if (error.response && error.response.status === 404) {
-        return null; // User not found
+        return null;
       }
-      throw error; // Re-throw other errors
+      throw error;
     }
   },
 };
