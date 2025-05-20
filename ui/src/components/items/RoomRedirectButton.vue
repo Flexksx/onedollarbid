@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted } from 'vue';
-import axiosInstance from '../../axios/axios';
+import axiosInstance from '../../api/axios/axios';
 
 const props = defineProps({
     product: {

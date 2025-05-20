@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import axios from '../../../../axios/axios'
+import axios from '../../../../api/axios/axios'
 
 const isOverlayVisible = ref(false)
 const itemName = ref('')

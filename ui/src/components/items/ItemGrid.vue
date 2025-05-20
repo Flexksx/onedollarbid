@@ -1,69 +1,60 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue'
-import axios from '../../axios/axios'
-import ItemBox from './ItemBox.vue'
+import { ref, computed, onMounted, watch } from 'vue'
+import ItemCard from './ItemCard.vue'
+import { useAuctionItemStore } from '../../api/stores/auctionItemStore'
 
-const items = ref([])
+const auctionItemStore = useAuctionItemStore();
+
 const currentPage = ref(1)
 const itemsPerPage = 8
-const totalItems = ref(0) 
 const nextButtonDisabled = ref(false)
 
+const items = computed(() => auctionItemStore.items);
+
 const fetchItems = async (page = 1) => {
-  const offset = (page - 1) * itemsPerPage
-  try {
-    const response = await axios.get('items', {
-      params: { offset, limit: itemsPerPage }
-    })
-    console.log('response:', response);
-
-    
-    items.value = response.data 
-    totalItems.value = response.data.length 
-
-    console.log('totalItems:', totalItems.value);
-    console.log('items:', items.value);
-
-    
-    if (response.data.length < itemsPerPage) {
-      nextButtonDisabled.value = true
-    } else {
-      nextButtonDisabled.value = false
-    }
-  } catch (error) {
-    console.error('Error fetching items:', error)
-  }
+  const offset = (page - 1) * itemsPerPage;
+  await auctionItemStore.fetchAuctionItemsPaginated(offset, itemsPerPage);
 }
 
+watch(() => auctionItemStore.items, (newItems) => {
+  if (newItems.length < itemsPerPage) {
+    nextButtonDisabled.value = true;
+  } else {
+    nextButtonDisabled.value = false;
+  }
+}, { immediate: true }); 
 
 const goToNextPage = () => {
-  if (nextButtonDisabled.value) return
+  if (nextButtonDisabled.value || auctionItemStore.loading) return
   currentPage.value++
   fetchItems(currentPage.value)
 }
 
-
 const goToPreviousPage = () => {
-  if (currentPage.value > 1) {
+  if (currentPage.value > 1 && !auctionItemStore.loading) {
     currentPage.value--
     fetchItems(currentPage.value)
   }
 }
 
-
-onMounted(() => fetchItems(currentPage.value))
+onMounted(() => {
+  fetchItems(currentPage.value)
+})
 </script>
 
 <template>
   <div>
-    <div class="grid-container">
-      <ItemBox v-for="item in items" :key="item.id" :product="item" />
+    <div v-if="auctionItemStore.loading" class="loading-indicator">Loading items...</div>
+    <div v-else-if="auctionItemStore.error" class="error-message">
+      Error fetching items: {{ auctionItemStore.error }}
+    </div>
+    <div v-else class="grid-container">
+      <ItemCard v-for="item in items" :key="item.id" :product="item" />
     </div>
 
-    
     <div class="pagination">
-      <button @click="goToPreviousPage" :disabled="currentPage === 1">Previous</button>
-      <button @click="goToNextPage" :disabled="nextButtonDisabled">Next</button>
+      <button @click="goToPreviousPage" :disabled="currentPage === 1 || auctionItemStore.loading">Previous</button>
+      <button @click="goToNextPage" :disabled="nextButtonDisabled || auctionItemStore.loading">Next</button>
     </div>
   </div>
 </template>
@@ -107,6 +98,16 @@ onMounted(() => fetchItems(currentPage.value))
 
 .pagination button:focus {
   outline: none; /* Remove default focus outline */
+}
+
+.loading-indicator, .error-message {
+  text-align: center;
+  padding: 20px;
+  font-size: 1.2em;
+}
+
+.error-message {
+  color: red;
 }
 </style>
 
